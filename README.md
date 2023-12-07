@@ -107,10 +107,10 @@ graph.paths().then((paths) => console.log(paths)); // [['begin','middle','end'],
 
 ```mermaid
 graph TD
-  begin --> middle
-  middle --> end
-  start --> middle
-  middle --> stop
+  begin-->middle;
+  middle-->end;
+  start-->middle;
+  middle-->stop;
 ```
 
 #### `async <Graph>.shortest(start?: T, stop?: T): Promise<Array<T> | undefined>`
