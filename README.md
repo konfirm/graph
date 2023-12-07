@@ -97,20 +97,20 @@ import { Graph } from '@konfirm/graph';
 
 const graph = new Graph<string>();
 
-graph.edge('begin', 'middle');
-graph.edge('middle', 'end');
-graph.edge('start', 'middle');
-graph.edge('middle', 'stop');
+graph.edge('begins', 'middle');
+graph.edge('middle', 'ends');
+graph.edge('starts', 'middle');
+graph.edge('middle', 'stops');
 
-graph.paths().then((paths) => console.log(paths)); // [['begin','middle','end'],['begin','middle','stop'],['start','middle','end'],['start','middle','stop']]
+graph.paths().then((paths) => console.log(paths)); // [['begins','middle','ends'],['begins','middle','stops'],['starts','middle','ends'],['starts','middle','stops']]
 ```
 
 ```mermaid
-graph TD;
-    begin-->middle;
-    middle-->end;
-    start-->middle;
-    middle-->stop;
+graph TD
+  begins-->middle
+  middle-->ends
+  starts-->middle
+  middle-->stops
 ```
 
 #### `async <Graph>.shortest(start?: T, stop?: T): Promise<Array<T> | undefined>`

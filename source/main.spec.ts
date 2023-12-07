@@ -32,16 +32,16 @@ test('README Examples - Usage', async (t) => {
 test('README Examples - API - paths', async (t) => {
     const graph = new Graph<string>();
     const expect = [
-        [ 'begin', 'middle', 'end' ],
-        [ 'begin', 'middle', 'stop' ],
-        [ 'start', 'middle', 'end' ],
-        [ 'start', 'middle', 'stop' ]
+        [ 'begins', 'middle', 'ends' ],
+        [ 'begins', 'middle', 'stops' ],
+        [ 'starts', 'middle', 'ends' ],
+        [ 'starts', 'middle', 'stops' ]
     ];
 
-    graph.edge('begin', 'middle');
-    graph.edge('middle', 'end');
-    graph.edge('start', 'middle');
-    graph.edge('middle', 'stop');
+    graph.edge('begins', 'middle');
+    graph.edge('middle', 'ends');
+    graph.edge('starts', 'middle');
+    graph.edge('middle', 'stops');
 
     const paths = await graph.paths();
 
