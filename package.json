@@ -1,0 +1,61 @@
+{
+  "name": "@konfirm/graph",
+  "version": "1.0.0",
+  "description": "",
+  "iife": "dist/graph.js",
+  "main": "dist/graph.cjs.js",
+  "module": "dist/graph.es.js",
+  "types": "dist/graph.d.ts",
+  "scripts": {
+    "test": "run-script-os",
+    "test:nix": "ts-node node_modules/tape/bin/tape 'source/**/*.spec.ts'",
+    "test:win32": "ts-node node_modules/tape/bin/tape source/**/*.spec.ts",
+    "test:coverage": "run-script-os",
+    "test:coverage:nix": "nyc --reporter=html --require ts-node/register tape 'source/**/*.spec.ts' | tap-arc",
+    "test:coverage:win32": "nyc --reporter=html --require ts-node/register tape source/**/*.spec.ts | tap-arc",
+    "test:pretty": "run-script-os",
+    "test:pretty:nix": "nyc --require ts-node/register tape 'source/**/*.spec.ts' | tap-arc",
+    "test:pretty:win32": "nyc --require ts-node/register tape source/**/*.spec.ts | tap-arc",
+    "prebuild": "tsc --declarationDir temp --declaration true --emitDeclarationOnly true",
+    "build": "rollup -c rollup.config.mjs",
+    "postbuild": "rm -rf temp",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konfirm/graph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konfirm/graph/issues"
+  },
+  "keywords": [
+    "graph"
+  ],
+  "author": "Rogier Spieker <rogier@konfirm.eu>",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "source"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/tape": "^5.6.4",
+    "nyc": "^15.1.0",
+    "rollup": "^4.6.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "run-script-os": "^1.1.6",
+    "tap-arc": "^1.2.2",
+    "tape": "^5.7.2",
+    "template-literal-each": "^3.0.1",
+    "template-literal-table": "^4.0.2",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.2"
+  }
+}
