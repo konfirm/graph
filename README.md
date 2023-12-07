@@ -106,7 +106,7 @@ graph.paths().then((paths) => console.log(paths)); // [['begin','middle','end'],
 ```
 
 ```mermaid
-graph TD
+graph TD;
   begin-->middle;
   middle-->end;
   start-->middle;
