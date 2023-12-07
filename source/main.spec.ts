@@ -28,3 +28,24 @@ test('README Examples - Usage', async (t) => {
 
     t.end();
 });
+
+test('README Examples - API - paths', async (t) => {
+    const graph = new Graph<string>();
+    const expect = [
+        [ 'begin', 'middle', 'end' ],
+        [ 'begin', 'middle', 'stop' ],
+        [ 'start', 'middle', 'end' ],
+        [ 'start', 'middle', 'stop' ]
+    ];
+
+    graph.edge('begin', 'middle');
+    graph.edge('middle', 'end');
+    graph.edge('start', 'middle');
+    graph.edge('middle', 'stop');
+
+    const paths = await graph.paths();
+
+    t.deepEqual(paths, expect, `paths() is ${JSON.stringify(expect)}`);
+
+    t.end();
+});

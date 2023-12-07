@@ -64,13 +64,13 @@ const graph = new Graph<number>();
 
 #### `<Graph>.edge(source: T, destination1: T [, ...destination:T]): number`
 
-Register one or more edges between nodes. This is like stating "from source, one can reach this destination/these destionations directly".
+Register one or more edges between nodes. This is like stating 'from source, one can reach this destination/these destionations directly'.
 A word of caution, if objects are used as node always use the same instance, as these is nodes are compared as is.
 The number returned is the number of adges actually added, any existing edge is preserved.
 
 #### `<Graph>.drop(source: T [, ...destination: T]): number`
 
-Remove all or only the known provided edges. This is like stating "from source, one can no longer read any/these destinations directly".
+Remove all or only the known provided edges. This is like stating 'from source, one can no longer read any/these destinations directly'.
 
 #### `Set<T> <Graph>.sources`
 
@@ -92,6 +92,27 @@ Obtain all stoppers as a Set, a stopper is any destination node which in itself 
 
 Obtain all possible paths, optionally from start and/or to stop.
 
+```ts
+import { Graph } from '@konfirm/graph';
+
+const graph = new Graph<string>();
+
+graph.edge('begin', 'middle');
+graph.edge('middle', 'end');
+graph.edge('start', 'middle');
+graph.edge('middle', 'stop');
+
+graph.paths().then((paths) => console.log(paths)); // [['begin','middle','end'],['begin','middle','stop'],['start','middle','end'],['start','middle','stop']]
+```
+
+```mermaid
+graph TD
+  begin --> middle
+  middle --> end
+  start --> middle
+  middle --> stop
+```
+
 #### `async <Graph>.shortest(start?: T, stop?: T): Promise<Array<T> | undefined>`
 
 Obtain the shortest possible path, optionally from start and/or to stop.
@@ -103,7 +124,7 @@ MIT License
 Copyright (c) 2023 Rogier Spieker (Konfirm)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
+of this software and associated documentation files (the 'Software'), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
@@ -112,7 +133,7 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
