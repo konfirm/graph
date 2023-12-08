@@ -86,7 +86,7 @@ graph.edge('middle', 'ends');
 graph.edge('starts', 'middle');
 graph.edge('middle', 'stops');
 
-console.log(graph.sources)); // ['begins','middle','starts']
+console.log(graph.sources)); // Set{'begins','middle','starts'}
 ```
 
 ```mermaid
@@ -112,7 +112,7 @@ graph.edge('middle', 'ends');
 graph.edge('starts', 'middle');
 graph.edge('middle', 'stops');
 
-console.log(graph.destinations)); // ['middle', 'ends', 'stops']
+console.log(graph.destinations)); // Set{'middle', 'ends', 'stops'}
 ```
 
 ```mermaid
@@ -137,7 +137,7 @@ graph.edge('middle', 'ends');
 graph.edge('starts', 'middle');
 graph.edge('middle', 'stops');
 
-console.log(graph.starters)); // ['begins', 'starts']
+console.log(graph.starters)); // Set{'begins', 'starts'}
 ```
 
 ```mermaid
@@ -163,7 +163,7 @@ graph.edge('middle', 'ends');
 graph.edge('starts', 'middle');
 graph.edge('middle', 'stops');
 
-console.log(graph.stoppers)); // ['ends', 'stops']
+console.log(graph.stoppers)); // Set{'ends', 'stops'}
 ```
 
 ```mermaid
@@ -218,13 +218,13 @@ graph.edge('done', 'complete');
 graph.edge('cancel', 'complete');
 
 graph.shortest()
-  .then((path) => console.log(path)); //
+  .then((path) => console.log(path)); // ['planned', 'doing', 'cancel', 'complete']
 
 graph.shortest('doing')
-  .then((path) => console.log(path)); //
+  .then((path) => console.log(path)); // ['doing', 'cancel', 'complete']
 
 graph.shortest('review', 'cancel')
-  .then((path) => console.log(path)); //
+  .then((path) => console.log(path)); // ['review', 'doing', 'cancel']
 
 ```
 
