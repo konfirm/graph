@@ -29,6 +29,62 @@ test('README Examples - Usage', async (t) => {
     t.end();
 });
 
+test('README Examples - API - sources', async (t) => {
+    const graph = new Graph<string>();
+    const expect = new Set([ 'begins', 'middle', 'starts']);
+
+    graph.edge('begins', 'middle');
+    graph.edge('middle', 'ends');
+    graph.edge('starts', 'middle');
+    graph.edge('middle', 'stops');
+
+    t.deepEqual(graph.sources, expect, `graph.sources is Set(${JSON.stringify([...expect])})`);
+
+    t.end();
+});
+
+test('README Examples - API - destinations', async (t) => {
+    const graph = new Graph<string>();
+    const expect = new Set([ 'middle', 'ends', 'stops']);
+
+    graph.edge('begins', 'middle');
+    graph.edge('middle', 'ends');
+    graph.edge('starts', 'middle');
+    graph.edge('middle', 'stops');
+
+    t.deepEqual(graph.destinations, expect, `graph.destinations is Set(${JSON.stringify([...expect])})`);
+
+    t.end();
+});
+
+test('README Examples - API - starters', async (t) => {
+    const graph = new Graph<string>();
+    const expect = new Set([ 'begins', 'starts']);
+
+    graph.edge('begins', 'middle');
+    graph.edge('middle', 'ends');
+    graph.edge('starts', 'middle');
+    graph.edge('middle', 'stops');
+
+    t.deepEqual(graph.starters, expect, `graph.starters is Set(${JSON.stringify([...expect])})`);
+
+    t.end();
+});
+
+test('README Examples - API - stoppers', async (t) => {
+    const graph = new Graph<string>();
+    const expect = new Set([ 'ends', 'stops']);
+
+    graph.edge('begins', 'middle');
+    graph.edge('middle', 'ends');
+    graph.edge('starts', 'middle');
+    graph.edge('middle', 'stops');
+
+    t.deepEqual(graph.stoppers, expect, `graph.stoppers is Set(${JSON.stringify([...expect])})`);
+
+    t.end();
+});
+
 test('README Examples - API - paths', async (t) => {
     const graph = new Graph<string>();
     const expect = [
@@ -46,6 +102,28 @@ test('README Examples - API - paths', async (t) => {
     const paths = await graph.paths();
 
     t.deepEqual(paths, expect, `paths() is ${JSON.stringify(expect)}`);
+
+    t.end();
+});
+
+
+test('README Examples - API - shortest', async (t) => {
+    const graph = new Graph<string>();
+    const expect = ['planned', 'doing', 'cancel', 'complete'];
+    const expect_doing = ['doing', 'cancel', 'complete'];
+    const expect_review_cancel = ['review', 'doing', 'cancel']
+
+    graph.edge('planned', 'doing');
+    graph.edge('doing', 'review');
+    graph.edge('doing', 'cancel');
+    graph.edge('review', 'done');
+    graph.edge('review', 'doing');
+    graph.edge('done', 'complete');
+    graph.edge('cancel', 'complete');
+
+    t.deepEqual(await graph.shortest(), expect, `shortest() is ${JSON.stringify(expect)}`);
+    t.deepEqual(await graph.shortest('doing'), expect_doing, `shortest('doing') is ${JSON.stringify(expect_doing)}`);
+    t.deepEqual(await graph.shortest('review', 'cancel'), expect_review_cancel, `shortest('review', 'cancel') is ${JSON.stringify(expect_review_cancel)}`);
 
     t.end();
 });
