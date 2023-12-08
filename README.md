@@ -30,6 +30,11 @@ console.log('A -> E', graph.shortest('A', 'E')); // ['A', 'B', 'C', 'D', 'E'];
 console.log('B -> E', graph.shortest('B', 'E')); // ['B', 'C', 'D', 'E'];
 ```
 
+```mermaid
+graph LR
+  A-->B-->C-->D-->E
+```
+
 A very basic linear flow, could have been solved with just an array... so let's add a little more fun to the flow
 
 ```ts
@@ -43,6 +48,13 @@ graph.edge('A', 'E');
 console.log('A -> C', graph.shortest('A', 'C')); // ['A', 'B', 'C']
 console.log('A -> E', graph.shortest('A', 'E')); // ['A', 'E'];
 console.log('B -> E', graph.shortest('B', 'E')); // ['B', 'A', 'E'];
+```
+
+```mermaid
+graph LR
+  A-->B-->C-->D-->E
+  B-->A
+  A-->E
 ```
 
 With the shortcut from A -> E in place, added with the allowed moving back from B -> A, suddenly the shortest path changes. This is what makes Graph a simple but powerful tool to use.
